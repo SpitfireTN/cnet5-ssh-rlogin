@@ -1,82 +1,58 @@
 # C-Net/5 SSH/RLogin
 
-CNet/5 `bbs` reverse-engineering workbench, plus the SSH/RLOGIN gateways
-(`ssh-proxy/`, `rlogin-gateway/`) that front the live BBS.
+SSH and RLOGIN gateways in front of a live CNet/5 BBS (a closed-source Amiga
+BBS engine, running under emulation, telnet-only on `127.0.0.1:6800`). Both
+gateways drive the BBS from the outside rather than patching it.
 
-Goal: recover editable/maintainable source for CNet/5 (Amiga BBS software,
-closed-source, no updates in years, original source unavailable). Starting
-with the core engine binary `DH3/CNet/bbs`.
+## shared/
 
-## Binary facts
+- `telnet_util.py` — telnet IAC negotiation + ANSI cursor-position handling
+  shared by both gateways below. Exports `BbsStreamFilter` (strips/answers
+  negotiation from BBS-sourced bytes) and `escape_caller_bytes` (doubles
+  literal `0xFF` from the caller so it isn't misread as IAC).
 
-- `DH3/CNet/bbs`: AmigaOS Hunk-format `loadseg()`-able executable, 324,644
-  bytes on disk.
-- Exactly 2 hunks: `HUNK_CODE` (297,076 bytes) + `HUNK_DATA` (22,820 bytes).
-  No `HUNK_BSS`, no `HUNK_SYMBOL`, no `HUNK_DEBUG`, no `HUNK_EXT` — fully
-  stripped release build. Zero function/variable names anywhere in the file.
-- Compiled with a SAS/C-style "resident small data" model: the CODE hunk is
-  pure position-independent code (safe to stay resident/shared across
-  concurrently-running BBS nodes); each running instance gets its own
-  private DATA+BSS area.
+## ssh-proxy/ — live SSH-to-telnet gateway
 
-## The A4 addressing scheme (this was the hard part)
+Lets people `ssh bbsguest@<host>` and land straight in the BBS's telnet port.
 
-Startup sequence (code offset 0x0-0x62ish):
-1. `moveal 0x4,%fp` — A6 = SysBase (ExecBase always lives at absolute
-   address 4 on AmigaOS).
-2. `movel #41992,%d0` / `movel #65537,%d1` / `jsr %fp@(-198)` —
-   `AllocMem(41992, MEMF_PUBLIC|MEMF_CLEAR)` (exec.library LVO -198).
-   0x10001 = MEMF_PUBLIC(1) | MEMF_CLEAR(0x10000).
-3. The 22,820 initialized bytes of the DATA hunk get copied into the front
-   of that fresh 41,992-byte buffer; the remaining ~19KB stays
-   zero-initialized (that's the program's BSS).
-4. `%a4` is left pointing 32,768 bytes into that buffer (confirmed via the
-   file's own `HUNK_RELOC32` table: the `lea 0x8000,%a4` at code+0xA is
-   itself a CODE→DATA relocation with pre-fixup value 0x8000).
+- `relay.py` — the deployed relay, invoked as sshd's `ForceCommand` for the
+  `bbsguest` account. Puts the pty in raw mode and uses `shared/telnet_util.py`
+  to strip/answer telnet negotiation and synthesize the ANSI cursor-position
+  reply the BBS expects during terminal auto-detect.
+- `fix_auth.sh` / `fix_auth2.sh` / `fix_shell.sh` / `redeploy_relay.sh` /
+  `relocate_relay.sh` / `rename_account.sh` — one-off setup/repair scripts
+  for the `bbsguest` account and the sshd `Match User bbsguest` block.
+  Historical repair steps, not a repeatable install script — read one
+  before rerunning it.
 
-**Net result: every `%a4@(N)` instruction in the disassembly addresses a
-real byte offset in the DATA hunk via `DATA_offset = N + 32768`.** Verified
-against known string locations (830/1039 extracted strings are reachable
-this way). This is what makes the whole binary crackable without symbols.
+Testing changes to `relay.py` requires reloading sshd
+(`sudo sshd -t && sudo systemctl reload ssh`) since it's invoked per-connection.
 
-## Files in this directory
+## rlogin-gateway/ — RLOGIN auto-login + outbound DoorParty bridge
 
-- `bbs_CODE.bin` / `bbs_DATA.bin` — raw extracted hunk payloads.
-- `bbs_CODE.disasm.txt` — full m68k disassembly (95,841 lines,
-  `m68k-linux-gnu-objdump -D -b binary -m m68k:68000`).
-- `code_targets.txt` — 457 addresses that are targets of absolute JSR/JMP
-  calls, per the file's `HUNK_RELOC32` table. Strong function-entry-point
-  candidates (only real call targets get a relocation entry).
-- `a4_string_xrefs.txt` — every extracted DATA-segment string mapped to the
-  code address(es) that reference it via `%a4@(N)`.
-- `a4_globals_inventory.txt` — every distinct A4-relative global slot
-  referenced anywhere in the code, with reference counts, and the string
-  label when the slot falls inside a known string.
-- `string_xrefs.txt` — earlier, mostly-empty attempt at xreffing via the
-  hunk relocation table directly (only catches ~5 hardcoded absolute
-  pointers; superseded by `a4_string_xrefs.txt`). Kept for reference.
+Two independent services that both speak RLOGIN (RFC 1282) at the BBS's
+telnet port, run as always-on systemd services (unlike `relay.py`, which is
+spawned per-connection).
 
-## Tooling
+- `rlogin_server.py` — **inbound**: listens on port 513, accepts the RLOGIN
+  handshake, and if the requested `server_user` has an entry in
+  `accounts.json` (copy from `accounts.example.json`, `chmod 600` — plaintext
+  BBS passwords, not committed), scripts the pre-login prompts so the caller
+  lands already logged in. Falls open to a plain relay after a 30s automation
+  budget or once the scripted steps finish.
+- `doorparty_bridge.py` — **outbound**: bridges the BBS's telnet-only
+  `ctelnet` door to `dpc2` (DoorParty Connector v2, RLOGIN). Binds
+  `127.0.0.1` only. Picks up the caller's handle from
+  `SysData:anet_identity`, falling back to the shared `system_tag` in
+  `doorparty.json` (copy from `doorparty.example.json`, not committed).
+- `test_rlogin_target.py` — throwaway RLOGIN echo server standing in for
+  `dpc2` to validate the `ctelnet → doorparty_bridge → target` chain
+  end-to-end before `dpc2`/DoorParty access exists.
+- `setup_rlogin.sh` / `setup_doorparty_bridge.sh` — install the respective
+  systemd unit and `chmod 600` the local config; each refuses to run until
+  its `.json` config has been copied from the `.example.json` and filled in.
 
-- No third-party binary-analysis code runs against the binary. Hunk parsing
-  is a from-scratch Python script (inline in this session's history, not
-  yet saved as a standalone file — TODO: extract to `hunk_parse.py`).
-  Disassembly uses `m68k-linux-gnu-objdump` (official Debian/Ubuntu
-  binutils package, installed via `apt install binutils-m68k-linux-gnu`).
-- A Ghidra 12.0.1 install + the community `ghidra-amiga` Hunk-loader
-  extension were downloaded to `~/tools/` but are NOT in use per explicit
-  decision to avoid running third-party analysis code against the binary.
-  They're sitting there unused if that decision ever gets revisited.
-
-## Not done yet / open work
-
-- No function boundaries identified yet beyond the raw `code_targets.txt`
-  candidate list — haven't walked any function to completion and named it.
-- No naming/annotation pass over `a4_globals_inventory.txt` — it's a raw
-  offset list, not yet turned into meaningful variable names.
-- Haven't checked whether other CNet binaries (`control`, `useredit`,
-  `toss`, etc.) share the same compiler/runtime conventions (likely, since
-  they're presumably built with the same toolchain, but unverified).
-- Nowhere near "editable C source" yet — this is disassembly + a working
-  cross-reference scheme, the scaffolding needed to start reconstructing
-  functions by hand, not reconstructed source itself.
+After editing either service's `.py`:
+`sudo systemctl restart rlogin-gateway` or
+`sudo systemctl restart doorparty-bridge` (no reload path — these run
+always-on, not per-connection like `relay.py`).

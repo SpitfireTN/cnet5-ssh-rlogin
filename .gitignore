@@ -2,6 +2,15 @@
 *.bin
 patches/
 
+# RE workbench (disasm, xrefs, control/) and live-config snapshots - not part of this repo's scope yet.
+bbs_CODE.disasm.txt
+a4_globals_inventory.txt
+a4_string_xrefs.txt
+code_targets.txt
+string_xrefs.txt
+control/
+content_backups/
+
 # Local-only config with real credentials/tags - copy from the .example.json templates instead.
 rlogin-gateway/accounts.json
 rlogin-gateway/doorparty.json
