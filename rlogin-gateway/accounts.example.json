@@ -1,0 +1,7 @@
+{
+  "_comment": "Copy this file to accounts.json (chmod 600) and fill in real handle/password pairs for accounts allowed to auto-login via RLOGIN. 'term' is the single-letter answer C-Net/5 expects at its 'Enter Terminal Type:' prompt: A=Amiga, I=IBM/ANSI, S=SkyPix. Defaults to I if omitted.",
+  "SomeHandle": {
+    "password": "the-real-bbs-password-for-this-account",
+    "term": "I"
+  }
+}

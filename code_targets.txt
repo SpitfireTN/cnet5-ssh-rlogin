@@ -1,0 +1,457 @@
+0x000228:      228:	202f 0004      	movel %sp@(4),%d0
+0x00031e:      31e:	2f0e           	movel %fp,%sp@-
+0x00037c:      37c:	48e7 0336      	moveml %d6-%d7/%a2-%a3/%a5-%fp,%sp@-
+0x000ec8:      ec8:	514f           	subqw #8,%sp
+0x0010b6:     10b6:	594f           	subqw #4,%sp
+0x001e26:     1e26:	9efc 00a0      	subaw #160,%sp
+0x001f64:     1f64:	9efc 00e0      	subaw #224,%sp
+0x0024fe:     24fe:	9efc 0258      	subaw #600,%sp
+0x0034f8:     34f8:	9efc 034c      	subaw #844,%sp
+0x006254:     6254:	102c 03a1      	moveb %a4@(929),%d0
+0x00628c:     628c:	48e7 0302      	moveml %d6-%d7/%fp,%sp@-
+0x006dc6:     6dc6:	2f0e           	movel %fp,%sp@-
+0x0070fc:     70fc:	9efc 005c      	subaw #92,%sp
+0x00755a:     755a:	48e7 0032      	moveml %a2-%a3/%fp,%sp@-
+0x0075d4:     75d4:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x00768e:     768e:	594f           	subqw #4,%sp
+0x00779c:     779c:	9efc 019c      	subaw #412,%sp
+0x008a6a:     8a6a:	48e7 3706      	moveml %d2-%d3/%d5-%d7/%a5-%fp,%sp@-
+0x008bf2:     8bf2:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x008c5c:     8c5c:	2200           	movel %d0,%d1
+0x008ca8:     8ca8:	9efc 03f4      	subaw #1012,%sp
+0x008e84:     8e84:	9efc 0014      	subaw #20,%sp
+0x008fee:     8fee:	6100 0012      	bsrw 0x9002
+0x00905e:     905e:	48e7 2002      	moveml %d2/%fp,%sp@-
+0x00915e:     915e:	514f           	subqw #8,%sp
+0x009720:     9720:	48e7 0716      	moveml %d5-%d7/%a3/%a5-%fp,%sp@-
+0x00989c:     989c:	9efc 000c      	subaw #12,%sp
+0x009c28:     9c28:	4a6c e61e      	tstw %a4@(-6626)
+0x009c52:     9c52:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x009dbe:     9dbe:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x009e82:     9e82:	9efc 019c      	subaw #412,%sp
+0x00ac18:     ac18:	9efc 0204      	subaw #516,%sp
+0x00b096:     b096:	9efc 0200      	subaw #512,%sp
+0x00b236:     b236:	9efc 0194      	subaw #404,%sp
+0x00b574:     b574:	302c e00c      	movew %a4@(-8180),%d0
+0x00b59c:     b59c:	9efc 00b8      	subaw #184,%sp
+0x00b6e6:     b6e6:	9efc 0184      	subaw #388,%sp
+0x00b9dc:     b9dc:	9efc 006c      	subaw #108,%sp
+0x00bb96:     bb96:	9efc 0078      	subaw #120,%sp
+0x00bdae:     bdae:	9efc 0a40      	subaw #2624,%sp
+0x00d052:     d052:	9efc 0df4      	subaw #3572,%sp
+0x01007c:    1007c:	2f07           	movel %d7,%sp@-
+0x0106e0:    106e0:	9efc 0060      	subaw #96,%sp
+0x0115f0:    115f0:	41ec 9e6a      	lea %a4@(-24982),%a0
+0x011768:    11768:	9efc 0030      	subaw #48,%sp
+0x0122fc:    122fc:	9efc 010c      	subaw #268,%sp
+0x0124ac:    124ac:	594f           	subqw #4,%sp
+0x01258a:    1258a:	9efc 00b0      	subaw #176,%sp
+0x01271a:    1271a:	9efc 0160      	subaw #352,%sp
+0x012b62:    12b62:	9efc 0068      	subaw #104,%sp
+0x0137cc:    137cc:	9efc 0108      	subaw #264,%sp
+0x013d76:    13d76:	9efc 0098      	subaw #152,%sp
+0x013f60:    13f60:	9efc 0098      	subaw #152,%sp
+0x01407e:    1407e:	48e7 2100      	moveml %d2/%d7,%sp@-
+0x0140d0:    140d0:	9efc 0040      	subaw #64,%sp
+0x014168:    14168:	48e7 0122      	moveml %d7/%a2/%fp,%sp@-
+0x0141ac:    141ac:	2f07           	movel %d7,%sp@-
+0x0141f8:    141f8:	9efc 01ec      	subaw #492,%sp
+0x014500:    14500:	2f0e           	movel %fp,%sp@-
+0x01457e:    1457e:	9efc 0014      	subaw #20,%sp
+0x014a80:    14a80:	48e7 0322      	moveml %d6-%d7/%a2/%fp,%sp@-
+0x014bce:    14bce:	4aac 0d72      	tstl %a4@(3442)
+0x014c6e:    14c6e:	9efc 0038      	subaw #56,%sp
+0x014e2c:    14e2c:	2f0a           	movel %a2,%sp@-
+0x014e6c:    14e6c:	48e7 0022      	moveml %a2/%fp,%sp@-
+0x014f50:    14f50:	4a6c 0204      	tstw %a4@(516)
+0x014f64:    14f64:	594f           	subqw #4,%sp
+0x0151f6:    151f6:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x0154bc:    154bc:	48e7 3f02      	moveml %d2-%d7/%fp,%sp@-
+0x0155c2:    155c2:	9efc 00cc      	subaw #204,%sp
+0x015632:    15632:	48e7 0122      	moveml %d7/%a2/%fp,%sp@-
+0x015686:    15686:	48e7 0122      	moveml %d7/%a2/%fp,%sp@-
+0x015b90:    15b90:	514f           	subqw #8,%sp
+0x015cf6:    15cf6:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x015e60:    15e60:	6100 fe94      	bsrw 0x15cf6
+0x015f46:    15f46:	9efc 0024      	subaw #36,%sp
+0x01631e:    1631e:	594f           	subqw #4,%sp
+0x0163e6:    163e6:	48e7 2002      	moveml %d2/%fp,%sp@-
+0x0170dc:    170dc:	4a2c 03a1      	tstb %a4@(929)
+0x01710c:    1710c:	2f0e           	movel %fp,%sp@-
+0x0171f8:    171f8:	9efc 0204      	subaw #516,%sp
+0x017534:    17534:	48e7 2100      	moveml %d2/%d7,%sp@-
+0x0176d0:    176d0:	296c 093e 0808 	movel %a4@(2366),%a4@(2056)
+0x0176ea:    176ea:	594f           	subqw #4,%sp
+0x017736:    17736:	9efc 022c      	subaw #556,%sp
+0x017b52:    17b52:	9efc 0100      	subaw #256,%sp
+0x017e90:    17e90:	42ac 028c      	clrl %a4@(652)
+0x017f1c:    17f1c:	48e7 0302      	moveml %d6-%d7/%fp,%sp@-
+0x0181da:    181da:	396c 0206 0c92 	movew %a4@(518),%a4@(3218)
+0x01836a:    1836a:	2f07           	movel %d7,%sp@-
+0x018762:    18762:	9efc 0100      	subaw #256,%sp
+0x01884c:    1884c:	4a6c 0278      	tstw %a4@(632)
+0x018882:    18882:	2f0d           	movel %a5,%sp@-
+0x0188ca:    188ca:	9efc 0098      	subaw #152,%sp
+0x018a2a:    18a2a:	422c 02f3      	clrb %a4@(755)
+0x018ac0:    18ac0:	9efc 03a0      	subaw #928,%sp
+0x019376:    19376:	9efc 02b0      	subaw #688,%sp
+0x019950:    19950:	9efc 0070      	subaw #112,%sp
+0x01a042:    1a042:	9efc 0050      	subaw #80,%sp
+0x01ad7c:    1ad7c:	9efc 0038      	subaw #56,%sp
+0x01b2d0:    1b2d0:	102c df7c      	moveb %a4@(-8324),%d0
+0x01b2f4:    1b2f4:	9efc 07dc      	subaw #2012,%sp
+0x01c198:    1c198:	9efc 04c8      	subaw #1224,%sp
+0x01c220:    1c220:	9efc 0040      	subaw #64,%sp
+0x01c440:    1c440:	9efc 00c8      	subaw #200,%sp
+0x01c7f0:    1c7f0:	9efc 0084      	subaw #132,%sp
+0x01ce26:    1ce26:	102c 02eb      	moveb %a4@(747),%d0
+0x01ce3c:    1ce3c:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x01ce98:    1ce98:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x01ceea:    1ceea:	9efc 0010      	subaw #16,%sp
+0x01d414:    1d414:	9efc 01e4      	subaw #484,%sp
+0x01d5f0:    1d5f0:	9efc 01e4      	subaw #484,%sp
+0x01d8b0:    1d8b0:	9efc 0050      	subaw #80,%sp
+0x01d902:    1d902:	594f           	subqw #4,%sp
+0x01daa4:    1daa4:	9efc 01b8      	subaw #440,%sp
+0x01db44:    1db44:	2f06           	movel %d6,%sp@-
+0x01db66:    1db66:	9efc 0428      	subaw #1064,%sp
+0x01dd22:    1dd22:	9efc 01bc      	subaw #444,%sp
+0x01de08:    1de08:	9efc 0184      	subaw #388,%sp
+0x01e29a:    1e29a:	48e7 3106      	moveml %d2-%d3/%d7/%a5-%fp,%sp@-
+0x01e2e4:    1e2e4:	9efc 0120      	subaw #288,%sp
+0x01e328:    1e328:	9efc 0048      	subaw #72,%sp
+0x01e470:    1e470:	48e7 3e06      	moveml %d2-%d6/%a5-%fp,%sp@-
+0x01e55e:    1e55e:	9efc 0080      	subaw #128,%sp
+0x01e688:    1e688:	2f07           	movel %d7,%sp@-
+0x01e6dc:    1e6dc:	9efc 05a8      	subaw #1448,%sp
+0x01e9c6:    1e9c6:	9efc 03e4      	subaw #996,%sp
+0x01ee94:    1ee94:	9efc 05b4      	subaw #1460,%sp
+0x01f112:    1f112:	9efc 00a0      	subaw #160,%sp
+0x01f1cc:    1f1cc:	9efc 00d4      	subaw #212,%sp
+0x01f3ae:    1f3ae:	9efc 00d8      	subaw #216,%sp
+0x01f64c:    1f64c:	9efc 00fc      	subaw #252,%sp
+0x01fb18:    1fb18:	594f           	subqw #4,%sp
+0x01fca2:    1fca2:	514f           	subqw #8,%sp
+0x01ff24:    1ff24:	2f0b           	movel %a3,%sp@-
+0x01ff62:    1ff62:	4a2c f362      	tstb %a4@(-3230)
+0x01ff94:    1ff94:	9efc 0168      	subaw #360,%sp
+0x020092:    20092:	9efc 0344      	subaw #836,%sp
+0x020558:    20558:	9efc 03e8      	subaw #1000,%sp
+0x020bc4:    20bc4:	9efc 00c8      	subaw #200,%sp
+0x020c4c:    20c4c:	9efc 010c      	subaw #268,%sp
+0x021124:    21124:	9efc 0160      	subaw #352,%sp
+0x02133a:    2133a:	9efc 0078      	subaw #120,%sp
+0x021466:    21466:	48e7 0106      	moveml %d7/%a5-%fp,%sp@-
+0x0214da:    214da:	2f07           	movel %d7,%sp@-
+0x021542:    21542:	9efc 0050      	subaw #80,%sp
+0x0216a6:    216a6:	9efc 0054      	subaw #84,%sp
+0x0217c4:    217c4:	9efc 0060      	subaw #96,%sp
+0x0239c8:    239c8:	9efc 0058      	subaw #88,%sp
+0x023b14:    23b14:	9efc 0058      	subaw #88,%sp
+0x023c76:    23c76:	48e7 0202      	moveml %d6/%fp,%sp@-
+0x023d76:    23d76:	9efc 030c      	subaw #780,%sp
+0x0245ea:    245ea:	9efc 0018      	subaw #24,%sp
+0x0246e8:    246e8:	41ec f162      	lea %a4@(-3742),%a0
+0x024704:    24704:	48e7 0706      	moveml %d5-%d7/%a5-%fp,%sp@-
+0x02484c:    2484c:	514f           	subqw #8,%sp
+0x024d06:    24d06:	2f07           	movel %d7,%sp@-
+0x024d78:    24d78:	48e7 0f04      	moveml %d4-%d7/%a5,%sp@-
+0x024f38:    24f38:	48e7 3002      	moveml %d2-%d3/%fp,%sp@-
+0x024fae:    24fae:	48e7 3002      	moveml %d2-%d3/%fp,%sp@-
+0x025032:    25032:	514f           	subqw #8,%sp
+0x0251c4:    251c4:	2f0e           	movel %fp,%sp@-
+0x0251f0:    251f0:	9efc 0010      	subaw #16,%sp
+0x02542a:    2542a:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x0255cc:    255cc:	2f07           	movel %d7,%sp@-
+0x0256da:    256da:	48e7 2100      	moveml %d2/%d7,%sp@-
+0x02587c:    2587c:	7003           	moveq #3,%d0
+0x0258b8:    258b8:	4a2c 039e      	tstb %a4@(926)
+0x02597a:    2597a:	9efc 002c      	subaw #44,%sp
+0x025d92:    25d92:	206c f262      	moveal %a4@(-3486),%a0
+0x025d9a:    25d9a:	2f06           	movel %d6,%sp@-
+0x025dd6:    25dd6:	2f0e           	movel %fp,%sp@-
+0x025e62:    25e62:	48e7 0106      	moveml %d7/%a5-%fp,%sp@-
+0x025f3c:    25f3c:	9efc 0030      	subaw #48,%sp
+0x026272:    26272:	2f0e           	movel %fp,%sp@-
+0x0262e4:    262e4:	48e7 0f02      	moveml %d4-%d7/%fp,%sp@-
+0x0264e4:    264e4:	594f           	subqw #4,%sp
+0x026666:    26666:	9efc 0014      	subaw #20,%sp
+0x0272dc:    272dc:	9efc 000c      	subaw #12,%sp
+0x027460:    27460:	594f           	subqw #4,%sp
+0x0274f0:    274f0:	48e7 0116      	moveml %d7/%a3/%a5-%fp,%sp@-
+0x02753e:    2753e:	48e7 3202      	moveml %d2-%d3/%d6/%fp,%sp@-
+0x027574:    27574:	9efc 00a8      	subaw #168,%sp
+0x027822:    27822:	48e7 2306      	moveml %d2/%d6-%d7/%a5-%fp,%sp@-
+0x0278c8:    278c8:	7000           	moveq #0,%d0
+0x0278ce:    278ce:	594f           	subqw #4,%sp
+0x027986:    27986:	9efc 0018      	subaw #24,%sp
+0x0279fe:    279fe:	9efc 0070      	subaw #112,%sp
+0x027ee4:    27ee4:	9efc 0018      	subaw #24,%sp
+0x028326:    28326:	206c dd4a      	moveal %a4@(-8886),%a0
+0x0283b0:    283b0:	082c 0004 03c0 	btst #4,%a4@(960)
+0x0283e0:    283e0:	2f0e           	movel %fp,%sp@-
+0x02848c:    2848c:	2f0b           	movel %a3,%sp@-
+0x0284d0:    284d0:	9efc 008c      	subaw #140,%sp
+0x028560:    28560:	48e7 0300      	moveml %d6-%d7,%sp@-
+0x0285c0:    285c0:	594f           	subqw #4,%sp
+0x028660:    28660:	48e7 3016      	moveml %d2-%d3/%a3/%a5-%fp,%sp@-
+0x028ca8:    28ca8:	9efc 0064      	subaw #100,%sp
+0x02911e:    2911e:	9efc 005c      	subaw #92,%sp
+0x02961c:    2961c:	9efc 00cc      	subaw #204,%sp
+0x029728:    29728:	9efc 0120      	subaw #288,%sp
+0x029826:    29826:	9efc 0010      	subaw #16,%sp
+0x02998c:    2998c:	9efc 0310      	subaw #784,%sp
+0x02a1ee:    2a1ee:	9efc 00f8      	subaw #248,%sp
+0x02a352:    2a352:	9efc 0018      	subaw #24,%sp
+0x02a59a:    2a59a:	48e7 3400      	moveml %d2-%d3/%d5,%sp@-
+0x02a630:    2a630:	48e7 2702      	moveml %d2/%d5-%d7/%fp,%sp@-
+0x02a71e:    2a71e:	9efc 0064      	subaw #100,%sp
+0x02aa6e:    2aa6e:	48e7 0016      	moveml %a3/%a5-%fp,%sp@-
+0x02ab38:    2ab38:	9efc 0064      	subaw #100,%sp
+0x02ba62:    2ba62:	48e7 2700      	moveml %d2/%d5-%d7,%sp@-
+0x02baf2:    2baf2:	594f           	subqw #4,%sp
+0x02bc32:    2bc32:	9efc 003c      	subaw #60,%sp
+0x02c510:    2c510:	514f           	subqw #8,%sp
+0x02c554:    2c554:	9efc 008c      	subaw #140,%sp
+0x02caf0:    2caf0:	2f0e           	movel %fp,%sp@-
+0x02cba4:    2cba4:	2f07           	movel %d7,%sp@-
+0x02cc30:    2cc30:	48e7 0006      	moveml %a5-%fp,%sp@-
+0x02cc8e:    2cc8e:	9efc 0058      	subaw #88,%sp
+0x02cd4c:    2cd4c:	2f0e           	movel %fp,%sp@-
+0x02cdb4:    2cdb4:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x02cdf6:    2cdf6:	594f           	subqw #4,%sp
+0x02ced0:    2ced0:	594f           	subqw #4,%sp
+0x02d048:    2d048:	2f0e           	movel %fp,%sp@-
+0x02d236:    2d236:	9efc 0154      	subaw #340,%sp
+0x02d488:    2d488:	9efc 0280      	subaw #640,%sp
+0x02d564:    2d564:	9efc 0038      	subaw #56,%sp
+0x02d842:    2d842:	206c f504      	moveal %a4@(-2812),%a0
+0x02d85e:    2d85e:	9efc 0020      	subaw #32,%sp
+0x02dbe8:    2dbe8:	4a2c 039d      	tstb %a4@(925)
+0x02e23c:    2e23c:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x02e2d2:    2e2d2:	9efc 000c      	subaw #12,%sp
+0x02e89c:    2e89c:	9efc 00e0      	subaw #224,%sp
+0x02f03c:    2f03c:	594f           	subqw #4,%sp
+0x03014e:    3014e:	9efc 0110      	subaw #272,%sp
+0x030c1e:    30c1e:	9efc 0180      	subaw #384,%sp
+0x030f12:    30f12:	48e7 0714      	moveml %d5-%d7/%a3/%a5,%sp@-
+0x030fcc:    30fcc:	9efc 00d8      	subaw #216,%sp
+0x031492:    31492:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x0314da:    314da:	594f           	subqw #4,%sp
+0x0315a2:    315a2:	9efc 008c      	subaw #140,%sp
+0x031830:    31830:	9efc 000c      	subaw #12,%sp
+0x031a3c:    31a3c:	48e7 2102      	moveml %d2/%d7/%fp,%sp@-
+0x031b16:    31b16:	594f           	subqw #4,%sp
+0x031d98:    31d98:	202c e41c      	movel %a4@(-7140),%d0
+0x031dd4:    31dd4:	2f0e           	movel %fp,%sp@-
+0x031fa2:    31fa2:	2f07           	movel %d7,%sp@-
+0x032014:    32014:	9efc 0064      	subaw #100,%sp
+0x032056:    32056:	9efc 0104      	subaw #260,%sp
+0x0320ee:    320ee:	48e7 0706      	moveml %d5-%d7/%a5-%fp,%sp@-
+0x032184:    32184:	9efc 00a0      	subaw #160,%sp
+0x0321ea:    321ea:	2f07           	movel %d7,%sp@-
+0x032356:    32356:	2948 f0fa      	movel %a0,%a4@(-3846)
+0x03248e:    3248e:	9efc 000c      	subaw #12,%sp
+0x0326bc:    326bc:	48e7 0106      	moveml %d7/%a5-%fp,%sp@-
+0x032dc4:    32dc4:	48e7 0302      	moveml %d6-%d7/%fp,%sp@-
+0x0332ce:    332ce:	9efc 0204      	subaw #516,%sp
+0x033e9e:    33e9e:	2200           	movel %d0,%d1
+0x033fda:    33fda:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x03406c:    3406c:	48e7 0700      	moveml %d5-%d7,%sp@-
+0x03416c:    3416c:	2f06           	movel %d6,%sp@-
+0x034428:    34428:	2f0e           	movel %fp,%sp@-
+0x034442:    34442:	2f0e           	movel %fp,%sp@-
+0x0345a4:    345a4:	41ec c2cc      	lea %a4@(-15668),%a0
+0x0345ae:    345ae:	2940 04e8      	movel %d0,%a4@(1256)
+0x0345b4:    345b4:	2f07           	movel %d7,%sp@-
+0x0345d2:    345d2:	9efc 009c      	subaw #156,%sp
+0x03468a:    3468a:	9efc 0064      	subaw #100,%sp
+0x03474c:    3474c:	2f06           	movel %d6,%sp@-
+0x0347a6:    347a6:	2f06           	movel %d6,%sp@-
+0x034800:    34800:	9efc 00fc      	subaw #252,%sp
+0x034922:    34922:	9efc 005c      	subaw #92,%sp
+0x034aa2:    34aa2:	9efc 02b4      	subaw #692,%sp
+0x035222:    35222:	9efc 0094      	subaw #148,%sp
+0x035466:    35466:	6100 175e      	bsrw 0x36bc6
+0x035476:    35476:	9efc 00c8      	subaw #200,%sp
+0x035d12:    35d12:	6100 0f18      	bsrw 0x36c2c
+0x035f8a:    35f8a:	9efc 0178      	subaw #376,%sp
+0x0363d4:    363d4:	9efc 0154      	subaw #340,%sp
+0x036868:    36868:	48e7 0700      	moveml %d5-%d7,%sp@-
+0x03692e:    3692e:	9efc 0088      	subaw #136,%sp
+0x036a80:    36a80:	9efc 0080      	subaw #128,%sp
+0x036b18:    36b18:	2f0d           	movel %a5,%sp@-
+0x036dea:    36dea:	48e7 0700      	moveml %d5-%d7,%sp@-
+0x036fde:    36fde:	9efc 0070      	subaw #112,%sp
+0x0372e0:    372e0:	9efc 09e0      	subaw #2528,%sp
+0x0377ba:    377ba:	594f           	subqw #4,%sp
+0x037964:    37964:	9efc 000c      	subaw #12,%sp
+0x037ac8:    37ac8:	9efc 01c0      	subaw #448,%sp
+0x03801a:    3801a:	48e7 0514      	moveml %d5/%d7/%a3/%a5,%sp@-
+0x0380ce:    380ce:	9efc 0024      	subaw #36,%sp
+0x038a1c:    38a1c:	9efc 00e4      	subaw #228,%sp
+0x038f18:    38f18:	48e7 0f16      	moveml %d4-%d7/%a3/%a5-%fp,%sp@-
+0x03920a:    3920a:	48e7 0700      	moveml %d5-%d7,%sp@-
+0x03932c:    3932c:	48e7 0706      	moveml %d5-%d7/%a5-%fp,%sp@-
+0x039684:    39684:	594f           	subqw #4,%sp
+0x03987a:    3987a:	2f0e           	movel %fp,%sp@-
+0x039afa:    39afa:	9efc 01e4      	subaw #484,%sp
+0x03a63c:    3a63c:	9efc 0108      	subaw #264,%sp
+0x03ab00:    3ab00:	594f           	subqw #4,%sp
+0x03ad96:    3ad96:	9efc 0064      	subaw #100,%sp
+0x03b0fc:    3b0fc:	9efc 0018      	subaw #24,%sp
+0x03b1ae:    3b1ae:	48e7 0022      	moveml %a2/%fp,%sp@-
+0x03b1d8:    3b1d8:	9efc 000c      	subaw #12,%sp
+0x03b22c:    3b22c:	594f           	subqw #4,%sp
+0x03b25a:    3b25a:	9efc 005c      	subaw #92,%sp
+0x03b4e4:    3b4e4:	9efc 0104      	subaw #260,%sp
+0x03b642:    3b642:	594f           	subqw #4,%sp
+0x03c166:    3c166:	9efc 01a0      	subaw #416,%sp
+0x03d98e:    3d98e:	514f           	subqw #8,%sp
+0x03df26:    3df26:	48e7 0304      	moveml %d6-%d7/%a5,%sp@-
+0x03df9c:    3df9c:	48e7 0604      	moveml %d5-%d6/%a5,%sp@-
+0x03f288:    3f288:	9efc 042c      	subaw #1068,%sp
+0x0405d0:    405d0:	9efc 0094      	subaw #148,%sp
+0x040de2:    40de2:	302c 131c      	movew %a4@(4892),%d0
+0x040e0e:    40e0e:	514f           	subqw #8,%sp
+0x040f38:    40f38:	9efc 0050      	subaw #80,%sp
+0x040fb8:    40fb8:	48e7 2004      	moveml %d2/%a5,%sp@-
+0x040ffc:    40ffc:	48e7 0702      	moveml %d5-%d7/%fp,%sp@-
+0x041070:    41070:	9efc 00c8      	subaw #200,%sp
+0x0410f0:    410f0:	514f           	subqw #8,%sp
+0x041144:    41144:	48e7 0714      	moveml %d5-%d7/%a3/%a5,%sp@-
+0x0411a8:    411a8:	206c 8c4c      	moveal %a4@(-29620),%a0
+0x0411d4:    411d4:	594f           	subqw #4,%sp
+0x04121c:    4121c:	48e7 2106      	moveml %d2/%d7/%a5-%fp,%sp@-
+0x041250:    41250:	594f           	subqw #4,%sp
+0x04128c:    4128c:	9efc 0100      	subaw #256,%sp
+0x04130c:    4130c:	48e7 3102      	moveml %d2-%d3/%d7/%fp,%sp@-
+0x041390:    41390:	48e7 3702      	moveml %d2-%d3/%d5-%d7/%fp,%sp@-
+0x041448:    41448:	2f0e           	movel %fp,%sp@-
+0x041534:    41534:	9efc 0034      	subaw #52,%sp
+0x0416e4:    416e4:	2f0d           	movel %a5,%sp@-
+0x041700:    41700:	2f0d           	movel %a5,%sp@-
+0x0417b0:    417b0:	9efc 0408      	subaw #1032,%sp
+0x0418c8:    418c8:	9efc 001c      	subaw #28,%sp
+0x041a6c:    41a6c:	9efc 0118      	subaw #280,%sp
+0x041c3c:    41c3c:	9efc 0020      	subaw #32,%sp
+0x041da4:    41da4:	9efc 0018      	subaw #24,%sp
+0x041ee8:    41ee8:	48e7 2114      	moveml %d2/%d7/%a3/%a5,%sp@-
+0x041f7c:    41f7c:	594f           	subqw #4,%sp
+0x041fd0:    41fd0:	48e7 2722      	moveml %d2/%d5-%d7/%a2/%fp,%sp@-
+0x042170:    42170:	2f0e           	movel %fp,%sp@-
+0x0421a0:    421a0:	9efc 0064      	subaw #100,%sp
+0x042248:    42248:	9efc 0080      	subaw #128,%sp
+0x0422bc:    422bc:	48e7 3102      	moveml %d2-%d3/%d7/%fp,%sp@-
+0x0422f8:    422f8:	48e7 3102      	moveml %d2-%d3/%d7/%fp,%sp@-
+0x0423b4:    423b4:	48e7 0316      	moveml %d6-%d7/%a3/%a5-%fp,%sp@-
+0x042430:    42430:	48e7 3102      	moveml %d2-%d3/%d7/%fp,%sp@-
+0x04246c:    4246c:	48e7 0106      	moveml %d7/%a5-%fp,%sp@-
+0x04248c:    4248c:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x0424c4:    424c4:	48e7 0322      	moveml %d6-%d7/%a2/%fp,%sp@-
+0x042590:    42590:	48e7 0316      	moveml %d6-%d7/%a3/%a5-%fp,%sp@-
+0x042604:    42604:	9efc 0080      	subaw #128,%sp
+0x0426b0:    426b0:	9efc 0064      	subaw #100,%sp
+0x042710:    42710:	9efc 0050      	subaw #80,%sp
+0x04273c:    4273c:	48e7 3106      	moveml %d2-%d3/%d7/%a5-%fp,%sp@-
+0x04278c:    4278c:	594f           	subqw #4,%sp
+0x0427d8:    427d8:	48e7 0006      	moveml %a5-%fp,%sp@-
+0x042810:    42810:	48e7 0114      	moveml %d7/%a3/%a5,%sp@-
+0x042850:    42850:	2f0d           	movel %a5,%sp@-
+0x04287c:    4287c:	9efc 0064      	subaw #100,%sp
+0x042990:    42990:	9efc 0180      	subaw #384,%sp
+0x042d88:    42d88:	206c 8c4c      	moveal %a4@(-29620),%a0
+0x042dbc:    42dbc:	206c 8c4c      	moveal %a4@(-29620),%a0
+0x042df8:    42df8:	2f0d           	movel %a5,%sp@-
+0x042e5c:    42e5c:	48e7 2002      	moveml %d2/%fp,%sp@-
+0x042ef0:    42ef0:	2f07           	movel %d7,%sp@-
+0x042f54:    42f54:	9efc 0018      	subaw #24,%sp
+0x04335c:    4335c:	9efc 0080      	subaw #128,%sp
+0x0433d0:    433d0:	48e7 2004      	moveml %d2/%a5,%sp@-
+0x043444:    43444:	48e7 2116      	moveml %d2/%d7/%a3/%a5-%fp,%sp@-
+0x04349c:    4349c:	9efc 0024      	subaw #36,%sp
+0x04364c:    4364c:	9efc 000c      	subaw #12,%sp
+0x04367c:    4367c:	9efc 0254      	subaw #596,%sp
+0x043890:    43890:	514f           	subqw #8,%sp
+0x043980:    43980:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x0439d0:    439d0:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x043a1c:    43a1c:	594f           	subqw #4,%sp
+0x043a9c:    43a9c:	48e7 0114      	moveml %d7/%a3/%a5,%sp@-
+0x043bd0:    43bd0:	9efc 0098      	subaw #152,%sp
+0x043e38:    43e38:	48e7 0306      	moveml %d6-%d7/%a5-%fp,%sp@-
+0x043ecc:    43ecc:	514f           	subqw #8,%sp
+0x043f30:    43f30:	48e7 2002      	moveml %d2/%fp,%sp@-
+0x043f84:    43f84:	2f07           	movel %d7,%sp@-
+0x043fd4:    43fd4:	48e7 0302      	moveml %d6-%d7/%fp,%sp@-
+0x044014:    44014:	9efc 0050      	subaw #80,%sp
+0x044038:    44038:	48e7 0006      	moveml %a5-%fp,%sp@-
+0x044070:    44070:	9efc 0100      	subaw #256,%sp
+0x0440b8:    440b8:	9efc 0100      	subaw #256,%sp
+0x04412c:    4412c:	9efc 000c      	subaw #12,%sp
+0x044230:    44230:	594f           	subqw #4,%sp
+0x044328:    44328:	9efc 0014      	subaw #20,%sp
+0x0447c0:    447c0:	48e7 0f04      	moveml %d4-%d7/%a5,%sp@-
+0x0448c8:    448c8:	48e7 3102      	moveml %d2-%d3/%d7/%fp,%sp@-
+0x044944:    44944:	0c80 0000 0018 	cmpil #24,%d0
+0x0449f0: <no line at this addr>
+0x0449fc:    449fc:	6000 0108      	braw 0x44b06
+0x044a08:    44a08:	48e7 0316      	moveml %d6-%d7/%a3/%a5-%fp,%sp@-
+0x044a82:    44a82:	48e7 0006      	moveml %a5-%fp,%sp@-
+0x044ac8:    44ac8:	48e7 0106      	moveml %d7/%a5-%fp,%sp@-
+0x044b06:    44b06:	2f0e           	movel %fp,%sp@-
+0x044b30:    44b30:	2248           	moveal %a0,%a1
+0x044b78:    44b78:	594f           	subqw #4,%sp
+0x044b9a:    44b9a:	594f           	subqw #4,%sp
+0x044bb4:    44bb4:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x044be4:    44be4:	9efc 0010      	subaw #16,%sp
+0x044cd4:    44cd4:	9efc 0024      	subaw #36,%sp
+0x044e6a:    44e6a:	594f           	subqw #4,%sp
+0x044eb4:    44eb4:	514f           	subqw #8,%sp
+0x044f58:    44f58:	7000           	moveq #0,%d0
+0x045080:    45080:	514f           	subqw #8,%sp
+0x045168:    45168:	48e7 3020      	moveml %d2-%d3/%a2,%sp@-
+0x0451b8:    451b8:	48e7 0102      	moveml %d7/%fp,%sp@-
+0x0451f4:    451f4:	594f           	subqw #4,%sp
+0x0453c8:    453c8:	48e7 2002      	moveml %d2/%fp,%sp@-
+0x04596c:    4596c:	4a80           	tstl %d0
+0x04599e:    4599e:	2f02           	movel %d2,%sp@-
+0x045a30: <no line at this addr>
+0x045a50:    45a50:	48e7 7000      	moveml %d1-%d3,%sp@-
+0x045a98:    45a98:	48e7 0016      	moveml %a3/%a5-%fp,%sp@-
+0x045e0c:    45e0c:	9efc 000c      	subaw #12,%sp
+0x045e8c:    45e8c:	2f0a           	movel %a2,%sp@-
+0x045eb4:    45eb4:	93c9           	subal %a1,%a1
+0x045ecc:    45ecc:	2f0a           	movel %a2,%sp@-
+0x045ef4:    45ef4:	b010           	cmpb %a0@,%d0
+0x045f34:    45f34:	4a80           	tstl %d0
+0x045f60:    45f60:	2008           	movel %a0,%d0
+0x045f7c:    45f7c:	2208           	movel %a0,%d1
+0x045fa0:    45fa0:	2208           	movel %a0,%d1
+0x04604c:    4604c:	2008           	movel %a0,%d0
+0x0461b8:    461b8:	4a80           	tstl %d0
+0x04632c:    4632c:	9efc 0018      	subaw #24,%sp
+0x0463e8:    463e8:	9efc 0010      	subaw #16,%sp
+0x0464fc: <no line at this addr>
+0x046540:    46540:	514f           	subqw #8,%sp
+0x046574:    46574:	514f           	subqw #8,%sp
+0x0465a8:    465a8:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x0465cc:    465cc:	206f 0004      	moveal %sp@(4),%a0
+0x046628:    46628:	206f 0004      	moveal %sp@(4),%a0
+0x0466b4:    466b4:	514f           	subqw #8,%sp
+0x046790:    46790:	594f           	subqw #4,%sp
+0x046a00:    46a00:	594f           	subqw #4,%sp
+0x046c48:    46c48:	48e7 0104      	moveml %d7/%a5,%sp@-
+0x046de8:    46de8:	594f           	subqw #4,%sp
+0x047444:    47444:	2200           	movel %d0,%d1
+0x047464:    47464:	2200           	movel %d0,%d1
+0x047484:    47484:	0280 0000 00ff 	andil #255,%d0
+0x04749c:    4749c:	0280 0000 00ff 	andil #255,%d0
+0x0474b4:    474b4:	0280 0000 00ff 	andil #255,%d0
+0x0474cc:    474cc:	0280 0000 00ff 	andil #255,%d0
+0x0474e4:    474e4:	0280 0000 00ff 	andil #255,%d0
+0x047514:    47514:	0280 0000 00ff 	andil #255,%d0
+0x04752c:    4752c:	0280 0000 00ff 	andil #255,%d0
+0x0475b8:    475b8:	594f           	subqw #4,%sp
+0x047880:    47880:	48e7 0704      	moveml %d5-%d7/%a5,%sp@-
+0x0483e8:    483e8:	514f           	subqw #8,%sp
+0x0485a8:    485a8:	4a80           	tstl %d0

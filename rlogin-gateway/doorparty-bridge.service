@@ -1,0 +1,13 @@
+[Unit]
+Description=Outbound bridge: C-Net/5 ctelnet door -> dpc2 (DoorParty)
+After=network.target
+
+[Service]
+Type=simple
+User=spitfiretn
+ExecStart=/usr/bin/python3 /home/spitfiretn/cnet-re/rlogin-gateway/doorparty_bridge.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

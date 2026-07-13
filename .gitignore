@@ -1,0 +1,11 @@
+# Extracted/patched copies of CNet/5's proprietary binary - not ours to redistribute publicly.
+*.bin
+patches/
+
+# Local-only config with real credentials/tags - copy from the .example.json templates instead.
+rlogin-gateway/accounts.json
+rlogin-gateway/doorparty.json
+
+# Python bytecode cache
+__pycache__/
+*.pyc

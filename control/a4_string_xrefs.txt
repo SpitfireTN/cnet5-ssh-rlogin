@@ -1,0 +1,231 @@
+DATA+0x0004 'BOTLOGON'  <- 2 loc(s): code+0x0028ac, code+0x002a3e
+DATA+0x03da 'Monitor/administer your BBS here'  <- 1 loc(s): code+0x007b28
+DATA+0x0a98 'FAIL'  <- 1 loc(s): code+0x0003f6
+DATA+0x0aa2 'FAIL'  <- 1 loc(s): code+0x00046c
+DATA+0x0aac 'FAIL'  <- 1 loc(s): code+0x0004aa
+DATA+0x0ab6 'FAIL'  <- 1 loc(s): code+0x00053c
+DATA+0x0abc 'Workbench'  <- 1 loc(s): code+0x000566
+DATA+0x0ac6 'Workbench'  <- 1 loc(s): code+0x000576
+DATA+0x0ad0 'cnet:configs/IMP'  <- 1 loc(s): code+0x0005b2
+DATA+0x0af6 'cnet:bbscontrol3'  <- 1 loc(s): code+0x0006a0
+DATA+0x0b08 'cnmail_serv'  <- 1 loc(s): code+0x00071a
+DATA+0x0b14 'cnfile_serv'  <- 1 loc(s): code+0x000724
+DATA+0x0b20 'cnnews_serv'  <- 1 loc(s): code+0x00072e
+DATA+0x0b2c 'cnyank_serv'  <- 1 loc(s): code+0x000738
+DATA+0x0b38 'cnsmtpd_port'  <- 1 loc(s): code+0x000742
+DATA+0x0b46 'cnftpd_port'  <- 1 loc(s): code+0x00074c
+DATA+0x0b52 'cntlntd_port'  <- 1 loc(s): code+0x000756
+DATA+0x0b76 'G=GUIOPEN/S,O=NOCONFIG/S,V=VERBOSE/S,M=NOMAILTASK/S,Y=NOYANKTASK/S,F=NOFILETASK/S,P=PUBSCREEN/K,W=NONEWSTASK/S,S=RUNSMTPD/S,T=RUNTELNETD/S'  <- 1 loc(s): code+0x000e10
+DATA+0x0c02 'bad arguments'  <- 1 loc(s): code+0x000e2c
+DATA+0x0c12 'Workbench'  <- 1 loc(s): code+0x000e4e
+DATA+0x0c1c 'cnetport'  <- 1 loc(s): code+0x000ec8
+DATA+0x0c26 'CONTROL is already running.'  <- 1 loc(s): code+0x000ee2
+DATA+0x0c46 'CST6'  <- 1 loc(s): code+0x000f34
+DATA+0x0c4c 'cnet.library'  <- 1 loc(s): code+0x000f54
+DATA+0x0c5a 'cnet4.library'  <- 1 loc(s): code+0x000f6a
+DATA+0x0c68 'cnetgui.library'  <- 1 loc(s): code+0x000f7c
+DATA+0x0c78 'intuition.library'  <- 1 loc(s): code+0x000f8c
+DATA+0x0c8a 'icon.library'  <- 1 loc(s): code+0x000f9c
+DATA+0x0c98 'graphics.library'  <- 1 loc(s): code+0x000fac
+DATA+0x0caa 'bgui.library'  <- 1 loc(s): code+0x000fbc
+DATA+0x0cb8 'diskfont.library'  <- 1 loc(s): code+0x000fcc
+DATA+0x0cca 'commodities.library'  <- 1 loc(s): code+0x000fdc
+DATA+0x0cde 'gadtools.library'  <- 1 loc(s): code+0x000fec
+DATA+0x0cf0 'cnet:bbsmenu'  <- 1 loc(s): code+0x001002
+DATA+0x0cfe 'Could not open CNET:BBSMENU file (required!).'  <- 1 loc(s): code+0x001012
+DATA+0x0d2e 'cnet:bbstext'  <- 1 loc(s): code+0x001022
+DATA+0x0d3c 'Could not open CNET:BBSTEXT file (required!).'  <- 1 loc(s): code+0x00102e
+DATA+0x0d6c 'timer.device'  <- 1 loc(s): code+0x00109c
+DATA+0x0d7a 'cnetport'  <- 1 loc(s): code+0x0011b6
+DATA+0x0d84 'cnet:big_numbers'  <- 1 loc(s): code+0x0012b2
+DATA+0x0d96 'cnet:CONFIGS/events.cfg'  <- 1 loc(s): code+0x001484
+DATA+0x0dae 'cnet:configs'  <- 1 loc(s): code+0x0014e0
+DATA+0x0dbc 'cnet:configs/bbsconfig4'  <- 1 loc(s): code+0x0014ec
+DATA+0x0dd4 'copy >NIL: <NIL: cnet:bbsconfig.def cnet:configs/bbsconfig4'  <- 1 loc(s): code+0x001504
+DATA+0x0e10 'cnet:configs/bbsconfig4'  <- 1 loc(s): code+0x001512
+DATA+0x0e28 'cnet:configs/archivers'  <- 1 loc(s): code+0x00156c
+DATA+0x0e40 'cnet:configs/archivers'  <- 1 loc(s): code+0x0015c2
+DATA+0x0e58 'INVALID VERSION'  <- 1 loc(s): code+0x001602
+DATA+0x0e68 'cnet:configs/bbsconfig_ext'  <- 1 loc(s): code+0x001622
+DATA+0x0e84 'cnet:configs/mime.cfg'  <- 1 loc(s): code+0x00166a
+DATA+0x0e9c 'CONTROLREXX'  <- 1 loc(s): code+0x001804
+DATA+0x0ea8 'CNet:'  <- 1 loc(s): code+0x00194a
+DATA+0x0eae 'run >NIL: <NIL: cnet:yank-task S=%s'  <- 1 loc(s): code+0x001974
+DATA+0x0ed2 'run >NIL: <NIL: cnet:mail-task S=%s'  <- 1 loc(s): code+0x00199c
+DATA+0x0ef6 'run >NIL: <NIL: cnet:file-task S=%s'  <- 1 loc(s): code+0x0019c4
+DATA+0x0f1a 'run >NIL: <NIL: cnet:news-task S=%s'  <- 1 loc(s): code+0x0019ec
+DATA+0x0f3e 'run >NIL: <NIL: cnet:cnSMTPd S=%s'  <- 1 loc(s): code+0x001a14
+DATA+0x0f60 'run >NIL: <NIL: cnet:telnetd'  <- 1 loc(s): code+0x001a3c
+DATA+0x0f84 'run >NIL: <NIL: cnet:config'  <- 1 loc(s): code+0x0022ba
+DATA+0x0fa0 'CNet:'  <- 1 loc(s): code+0x0022e2
+DATA+0x0fa6 'run >NIL: <NIL: cnet:configarcs'  <- 1 loc(s): code+0x002302
+DATA+0x0fc6 'CNet:'  <- 1 loc(s): code+0x00232a
+DATA+0x0fcc 'run >NIL: <NIL: cnet:configimp'  <- 1 loc(s): code+0x00234a
+DATA+0x0fec 'CNet:'  <- 1 loc(s): code+0x002372
+DATA+0x0ff2 'run >NIL: <NIL: cnet:cron'  <- 1 loc(s): code+0x002392
+DATA+0x100c 'CNet:'  <- 1 loc(s): code+0x0023ba
+DATA+0x1012 'run >NIL: <NIL: cnet:MIMEEd'  <- 1 loc(s): code+0x0023da
+DATA+0x102e 'CNet:'  <- 1 loc(s): code+0x002402
+DATA+0x1034 'run >NIL: <NIL: cnet:ConfigFTN'  <- 1 loc(s): code+0x002422
+DATA+0x1054 'CNet:'  <- 1 loc(s): code+0x00244a
+DATA+0x105a 'run >NIL: <NIL: cnet:UpdateCheck'  <- 1 loc(s): code+0x00246a
+DATA+0x107c 'CNet:'  <- 1 loc(s): code+0x002492
+DATA+0x1082 'run >NIL: <NIL: cnet:bugReport'  <- 1 loc(s): code+0x0024b2
+DATA+0x10a2 'CNet:'  <- 1 loc(s): code+0x002500
+DATA+0x10a8 'run >NIL: <NIL: cnet:useredit'  <- 1 loc(s): code+0x002540
+DATA+0x10c6 'run >NIL: <NIL: cnet:useredit u=%s'  <- 1 loc(s): code+0x002558
+DATA+0x10ea 'CNet:'  <- 1 loc(s): code+0x002590
+DATA+0x10f0 'run >NIL: <NIL: cnet:subboardutil'  <- 1 loc(s): code+0x0025b0
+DATA+0x1112 'run >NIL: <NIL: cnet:cnsmtpd S=%s'  <- 1 loc(s): code+0x002674
+DATA+0x1134 'run >NIL: <NIL: cnet:telnetd S=%s'  <- 1 loc(s): code+0x0026ae
+DATA+0x1156 'cnmail_serv'  <- 1 loc(s): code+0x00271a
+DATA+0x1162 'cnmail_serv'  <- 1 loc(s): code+0x002758
+DATA+0x116e 'CNet:'  <- 1 loc(s): code+0x00276e
+DATA+0x1174 'run >NIL: <NIL: cnet:mail-task S=%s'  <- 1 loc(s): code+0x002792
+DATA+0x1198 'cnmail_serv'  <- 1 loc(s): code+0x0027ce
+DATA+0x11a4 'cnmail_serv'  <- 1 loc(s): code+0x002812
+DATA+0x11b0 'cnmail_serv'  <- 1 loc(s): code+0x00282e
+DATA+0x11bc 'cnmail_serv'  <- 1 loc(s): code+0x002848
+DATA+0x11c8 'cnmail_serv'  <- 1 loc(s): code+0x002868
+DATA+0x11d4 'cnfile_serv'  <- 1 loc(s): code+0x0028bc
+DATA+0x11e0 'cnfile_serv'  <- 1 loc(s): code+0x0028fa
+DATA+0x11ec 'CNet:'  <- 1 loc(s): code+0x002910
+DATA+0x11f2 'run >NIL: <NIL: cnet:file-task S=%s'  <- 1 loc(s): code+0x002934
+DATA+0x1216 'cnfile_serv'  <- 1 loc(s): code+0x002970
+DATA+0x1222 'cnfile_serv'  <- 1 loc(s): code+0x0029a8
+DATA+0x122e 'cnfile_serv'  <- 1 loc(s): code+0x0029c4
+DATA+0x123a 'cnfile_serv'  <- 1 loc(s): code+0x0029de
+DATA+0x1246 'cnfile_serv'  <- 1 loc(s): code+0x0029fa
+DATA+0x1252 'cnyank_serv'  <- 1 loc(s): code+0x002a4e
+DATA+0x125e 'cnyank_serv'  <- 1 loc(s): code+0x002a8c
+DATA+0x126a 'CNet:'  <- 1 loc(s): code+0x002aa2
+DATA+0x1270 'run >NIL: <NIL: cnet:yank-task S=%s'  <- 1 loc(s): code+0x002ac6
+DATA+0x1294 'cnyank_serv'  <- 1 loc(s): code+0x002b02
+DATA+0x12a0 'cnyank_serv'  <- 1 loc(s): code+0x002b3a
+DATA+0x12ac 'cnyank_serv'  <- 1 loc(s): code+0x002b56
+DATA+0x12b8 'cnyank_serv'  <- 1 loc(s): code+0x002b70
+DATA+0x12c4 'cnyank_serv'  <- 1 loc(s): code+0x002b8c
+DATA+0x12d0 'cnnews_serv'  <- 1 loc(s): code+0x002be4
+DATA+0x12dc 'cnnews_serv'  <- 1 loc(s): code+0x002c2a
+DATA+0x12e8 'CNet:'  <- 1 loc(s): code+0x002c40
+DATA+0x12ee 'run >NIL: <NIL: cnet:news-task S=%s'  <- 1 loc(s): code+0x002c64
+DATA+0x1312 'cnnews_serv'  <- 1 loc(s): code+0x002ca0
+DATA+0x131e 'cnnews_serv'  <- 1 loc(s): code+0x002cdc
+DATA+0x132a 'cnnews_serv'  <- 1 loc(s): code+0x002cfc
+DATA+0x1336 'cnnews_serv'  <- 1 loc(s): code+0x002d1a
+DATA+0x1342 'cnnews_serv'  <- 1 loc(s): code+0x002d3a
+DATA+0x134e 'Loading...'  <- 1 loc(s): code+0x00325e
+DATA+0x135a 'CNet:'  <- 1 loc(s): code+0x003266
+DATA+0x1360 'run %s cnet:bbs %d PUBSCREEN=%s'  <- 1 loc(s): code+0x0032a4
+DATA+0x1382 '>NIL:'  <- 1 loc(s): code+0x003286
+DATA+0x1388 'Loaded.'  <- 1 loc(s): code+0x003306
+DATA+0x1390 'Failed.'  <- 1 loc(s): code+0x00331e
+DATA+0x1398 'sysdata:AppIcon.info'  <- 1 loc(s): code+0x00334e
+DATA+0x13ae 'workbench.library'  <- 1 loc(s): code+0x003360
+DATA+0x13c0 'sysdata:AppIcon'  <- 1 loc(s): code+0x003374
+DATA+0x13d0 'CNet/Control'  <- 1 loc(s): code+0x00339e
+DATA+0x13de 'cnet:bbscontrol3'  <- 1 loc(s): code+0x003454
+DATA+0x13f0 'cnet:bbscontrol3'  <- 1 loc(s): code+0x00357e
+DATA+0x1402 'cnmail_serv'  <- 1 loc(s): code+0x003612
+DATA+0x140e 'cnfile_serv'  <- 1 loc(s): code+0x00361c
+DATA+0x141a 'cnnews_serv'  <- 1 loc(s): code+0x003626
+DATA+0x1426 'cnyank_serv'  <- 1 loc(s): code+0x003630
+DATA+0x1432 'cnsmtpd_port'  <- 1 loc(s): code+0x00363a
+DATA+0x1440 'cntlntd_port'  <- 1 loc(s): code+0x003644
+DATA+0x144e 'cnftpd_port'  <- 1 loc(s): code+0x00364e
+DATA+0x1722 'CNet/5 UserInfo'  <- 1 loc(s): code+0x003e14
+DATA+0x1732 'CNet/5 Professional '  <- 1 loc(s): code+0x003e0a
+DATA+0x176c 'systext:noises'  <- 1 loc(s): code+0x003f0c
+DATA+0x177c 'systext:noises%d'  <- 1 loc(s): code+0x003f28
+DATA+0x1796 '-0123456789'  <- 1 loc(s): code+0x00412c
+DATA+0x17a6 'cnet:bbstext'  <- 1 loc(s): code+0x0041a8
+DATA+0x17b4 'cnet:bbsmenu'  <- 1 loc(s): code+0x0041b8
+DATA+0x17c2 'cnet:bbstext%d'  <- 1 loc(s): code+0x0041d2
+DATA+0x17d2 'cnet:bbsmenu%d'  <- 1 loc(s): code+0x0041e6
+DATA+0x17e8 'SysData:bbs.sam'  <- 1 loc(s): code+0x004866
+DATA+0x17f8 'SysData:bbs.sdata'  <- 1 loc(s): code+0x004908
+DATA+0x180a 'SysData:passwords'  <- 1 loc(s): code+0x004938
+DATA+0x181c 'cnet:bbsroom[0-9]#[0-9]'  <- 1 loc(s): code+0x00497e
+DATA+0x1834 'cnet:bbsroom%d'  <- 1 loc(s): code+0x0049a6
+DATA+0x1844 'sysdata:subboards4'  <- 1 loc(s): code+0x004abc
+DATA+0x1858 'direct'  <- 1 loc(s): code+0x004c7c
+DATA+0x1860 'Subboard %s could not be properly intialized.'  <- 1 loc(s): code+0x004ce0
+DATA+0x1890 'SysData:bbs.ukeys4'  <- 1 loc(s): code+0x004d10
+DATA+0x18a4 'SysData:bbs.uind1'  <- 1 loc(s): code+0x004d54
+DATA+0x18b6 'SysData:bbs.uind2'  <- 1 loc(s): code+0x004d82
+DATA+0x18c8 'SysData:log/calls'  <- 1 loc(s): code+0x004db8
+DATA+0x18da 'SysData:bbs.adata'  <- 1 loc(s): code+0x004e02
+DATA+0x18ec 'New User'  <- 1 loc(s): code+0x004e58
+DATA+0x18f6 'cnet:bbscharges[0-9]#[0-9]'  <- 1 loc(s): code+0x004f04
+DATA+0x1912 'cnet:bbscharges%d'  <- 1 loc(s): code+0x004f38
+DATA+0x1924 'Event %s not queued because low memory or memory fragmented.'  <- 1 loc(s): code+0x005062
+DATA+0x1962 'Event %s not queued because port %ld events locked'  <- 1 loc(s): code+0x0051d8
+DATA+0x1996 'Event %s not queued because port %ld not loaded'  <- 1 loc(s): code+0x005206
+DATA+0x19ca 'Control event could not be queued: %s (locked)'  <- 1 loc(s): code+0x00534a
+DATA+0x19fa 'Port %ld event could not be queued: %s'  <- 1 loc(s): code+0x00539c
+DATA+0x1a22 'CNet:'  <- 1 loc(s): code+0x005494
+DATA+0x1a28 '%s error: %ld'  <- 1 loc(s): code+0x0054c6
+DATA+0x1a36 '%s error: type invalid'  <- 1 loc(s): code+0x005500
+DATA+0x1a52 'CST6'  <- 1 loc(s): code+0x0056aa
+DATA+0x1a58 'SysData:log/events'  <- 1 loc(s): code+0x00576a
+DATA+0x1a6c '%s %s %s  %s'  <- 1 loc(s): code+0x005794
+DATA+0x1a7a 'STARTED: '  <- 1 loc(s): code+0x005784
+DATA+0x1a84 'FINISHED:'  <- 1 loc(s): code+0x00577c
+DATA+0x1a8e '          %s %s  %s'  <- 1 loc(s): code+0x0057b0
+DATA+0x1aa4 'control_rendezvous'  <- 1 loc(s): code+0x00582c
+DATA+0x1aba 'CNet/5 Professional '  <- 1 loc(s): code+0x00656c
+DATA+0x1af4 '%02d-%3.3s-%02d %02d:%02d'  <- 1 loc(s): code+0x00694a
+DATA+0x1b0e '%02d-%3.3s-%02d %02d:%02d'  <- 1 loc(s): code+0x0069d2
+DATA+0x1b28 '%2d-%s %2d:%02d'  <- 1 loc(s): code+0x006ab2
+DATA+0x1b38 'sysdata:log/control'  <- 1 loc(s): code+0x006ad2
+DATA+0x1b4c 'sysdata:log/control'  <- 1 loc(s): code+0x006af6
+DATA+0x1b88 'SysData:bbs.sam'  <- 1 loc(s): code+0x006dc0
+DATA+0x1b9c '%02d-%3.3s-%04d %02d:%02d'  <- 1 loc(s): code+0x0070fa
+DATA+0x1bb6 'asl.library'  <- 1 loc(s): code+0x0071de
+DATA+0x1bc2 'Choose a Font..'  <- 1 loc(s): code+0x007216
+DATA+0x1bd2 'P# User                 AG Logon CPS From                    Status                                      '  <- 1 loc(s): code+0x00735a
+DATA+0x1c3c '%2d '  <- 1 loc(s): code+0x007514
+DATA+0x1c42 '%-20.20s%c%2d %2d:%02d %3d '  <- 1 loc(s): code+0x0075ac
+DATA+0x1c5e '%-20.20s %2d %5s %3d '  <- 1 loc(s): code+0x0075cc
+DATA+0x1c74 '    (no one)'  <- 1 loc(s): code+0x0075c8
+DATA+0x1c84 '                                  '  <- 1 loc(s): code+0x0075de
+DATA+0x1caa 'ETA: %ld.%ld hours'  <- 1 loc(s): code+0x007730
+DATA+0x1cbe 'ETA: %ld.%ld mins'  <- 1 loc(s): code+0x00776a
+DATA+0x1cd0 'ETA: %ld secs'  <- 1 loc(s): code+0x00777e
+DATA+0x1cde '%-49.49s'  <- 1 loc(s): code+0x0077b0
+DATA+0x1ce8 '%ld.%ld hours'  <- 1 loc(s): code+0x0077fe
+DATA+0x1cf6 '%ld.%ld mins'  <- 1 loc(s): code+0x00781e
+DATA+0x1d04 'Event: %-16.16s %-25.25s'  <- 1 loc(s): code+0x007836
+DATA+0x1d1e 'bsdsocket.library'  <- 1 loc(s): code+0x00786a
+DATA+0x1d30 '%-23.23s %-25.25s'  <- 1 loc(s): code+0x00789c
+DATA+0x1d42 '%-19.19s %3.3s %-25.25s'  <- 1 loc(s): code+0x0078ba
+DATA+0x1d5a '%ld.%ld hours'  <- 1 loc(s): code+0x007914
+DATA+0x1d68 '%ld.%ld mins'  <- 1 loc(s): code+0x007934
+DATA+0x1d76 'Event: %-16.16s %-25.25s'  <- 1 loc(s): code+0x00794c
+DATA+0x1d90 '                        %-25.25s'  <- 1 loc(s): code+0x007960
+DATA+0x1db2 '                        %-25.25s'  <- 1 loc(s): code+0x007968
+DATA+0x1de2 'cnet:bbslicense'  <- 1 loc(s): code+0x0084fc
+DATA+0x1dfc 'cnet:bbslicense'  <- 1 loc(s): code+0x00873e
+DATA+0x1e0c '%02d-%3.3s-%04d %02d:%02d'  <- 1 loc(s): code+0x008896
+DATA+0x1e26 '%02d-%3.3s-%04d %02d:%02d'  <- 1 loc(s): code+0x0088e6
+DATA+0x1e40 '%06d %06d'  <- 1 loc(s): code+0x0088fe
+DATA+0x1e4a '$VER: C-NET AMIGA BBS 5.36b'  <- 1 loc(s): code+0x008ab6
+DATA+0x1ef0 '%02d-%3.3s-%04d %02d:%02d'  <- 1 loc(s): code+0x008e20
+DATA+0x2162 'BASE%d:'  <- 1 loc(s): code+0x0093ec
+DATA+0x2208 'CNet/5 SysInfo'  <- 1 loc(s): code+0x0098c2
+DATA+0x2218 'CNet/5 Professional '  <- 1 loc(s): code+0x0098b8
+DATA+0x2252 'CNet/5 License'  <- 1 loc(s): code+0x009c6e
+DATA+0x2262 'CNet/5 Professional '  <- 1 loc(s): code+0x009c64
+DATA+0x22b8 'CNet/5 License'  <- 1 loc(s): code+0x009f4a
+DATA+0x22c8 'CNet/5 Professional '  <- 1 loc(s): code+0x009f40
+DATA+0x231a 'CNet/5 License'  <- 1 loc(s): code+0x00a0ae
+DATA+0x232a 'CNet/5 Professional '  <- 1 loc(s): code+0x00a0a4
+DATA+0x2370 'CNet/5 License'  <- 1 loc(s): code+0x00a2b8
+DATA+0x2380 'CNet/5 Professional '  <- 1 loc(s): code+0x00a2ae
+DATA+0x2426 'Workbench'  <- 1 loc(s): code+0x00a334
+DATA+0x2430 'CNETCONFIG'  <- 1 loc(s): code+0x00a43c
+DATA+0x243c 'CNet/5 Professional '  <- 1 loc(s): code+0x00a432
+DATA+0x247e 'T`CST'  <- 2 loc(s): code+0x0056b0, code+0x0056bc
+DATA+0x24a9 '         (((((                  H'  <- 4 loc(s): code+0x00aad8, code+0x00b7e2, code+0x00b816, code+0x00c584
+DATA+0x2618 '/auto/close/wait'  <- 2 loc(s): code+0x00c3d2, code+0x00c41c
+DATA+0x262c 'con:10/10/320/80/'  <- 3 loc(s): code+0x00bf96, code+0x00c386, code+0x00c3f6

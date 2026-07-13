@@ -1,0 +1,15 @@
+[Unit]
+Description=RLOGIN gateway for Reign of Fire BBS (C-Net/5)
+After=network.target
+
+[Service]
+Type=simple
+User=spitfiretn
+ExecStart=/usr/bin/python3 /home/spitfiretn/cnet-re/rlogin-gateway/rlogin_server.py
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

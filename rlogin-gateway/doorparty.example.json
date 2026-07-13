@@ -1,0 +1,8 @@
+{
+  "_comment": "Copy this file to doorparty.json (chmod 600) once DoorParty access is granted, then fill in the real system tag. dpc2 (DoorParty Connector v2) must already be installed and running locally, bound to 127.0.0.1, before this bridge is useful.",
+  "system_tag": "YOUR-SYSTEM-TAG-HERE",
+  "client_user": "cnetbbs",
+  "term": "ansi/38400",
+  "dpc2_host": "127.0.0.1",
+  "dpc2_port": 9999
+}
