@@ -151,11 +151,17 @@ def respond_to_option(cmd: int, opt: int) -> bytes:
 
 
 def handle_caller_to_bbs(data: bytes) -> bytes:
-    """Escape any literal 0xFF byte the caller typed so it isn't misread as telnet IAC."""
-    if IAC not in data:
+    """Escape any literal 0xFF byte the caller typed so it isn't misread as telnet IAC,
+    and remap DEL (0x7F - what most modern terminals send for the Backspace key) to BS
+    (0x08). Confirmed directly against the BBS: it silently drops 0x7F (no echo, no
+    erase) but treats 0x08 as destructive backspace, emitting the expected
+    backspace/space/backspace erase sequence."""
+    if IAC not in data and 0x7F not in data:
         return data
     out = bytearray()
     for b in data:
+        if b == 0x7F:
+            b = 0x08
         out.append(b)
         if b == IAC:
             out.append(IAC)
