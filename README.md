@@ -13,20 +13,29 @@ gateways drive the BBS from the outside rather than patching it.
 
 ## ssh-proxy/ — live SSH-to-telnet gateway
 
-Lets people `ssh bbsguest@<host>` and land straight in the BBS's telnet port.
+Lets people `ssh call@<host>` and land straight in the BBS's telnet port.
 
 - `relay.py` — the deployed relay, invoked as sshd's `ForceCommand` for the
-  `bbsguest` account. Puts the pty in raw mode and uses `shared/telnet_util.py`
-  to strip/answer telnet negotiation and synthesize the ANSI cursor-position
-  reply the BBS expects during terminal auto-detect.
+  `call` account (renamed from `bbsguest`; see `rename_account.sh`). Puts
+  the pty in raw mode, strips/answers telnet negotiation, synthesizes the
+  ANSI cursor-position reply the BBS expects during terminal auto-detect,
+  and transcodes the BBS's CP437 output to UTF-8 so callers on modern
+  terminals see ANSI art correctly instead of raw high-byte garbage. This
+  logic used to be imported from `shared/telnet_util.py` (still used by
+  `rlogin-gateway/`) but is now self-contained in `relay.py` — CP437 is a
+  single-byte encoding, so the transcode is safe to apply per-chunk with no
+  buffering needed, even across an arbitrarily-fragmented TCP stream.
+  Deployed to `/usr/local/bin/cnet-ssh-relay.py` (root:root, 755), not run
+  from this checkout — see `relocate_relay.sh`.
 - `fix_auth.sh` / `fix_auth2.sh` / `fix_shell.sh` / `redeploy_relay.sh` /
-  `relocate_relay.sh` / `rename_account.sh` — one-off setup/repair scripts
-  for the `bbsguest` account and the sshd `Match User bbsguest` block.
-  Historical repair steps, not a repeatable install script — read one
-  before rerunning it.
+  `relocate_relay.sh` / `rename_account.sh` — one-off setup/repair scripts,
+  roughly chronological, for the gateway account and the sshd `Match User`
+  block. Historical repair steps, not a repeatable install script — read
+  one before rerunning it.
 
-Testing changes to `relay.py` requires reloading sshd
-(`sudo sshd -t && sudo systemctl reload ssh`) since it's invoked per-connection.
+Testing changes means editing/testing a copy, then `sudo cp`-ing it to
+`/usr/local/bin/cnet-ssh-relay.py` (`redeploy_relay.sh` does this) — no sshd
+reload needed, since it's invoked fresh per-connection.
 
 ## rlogin-gateway/ — RLOGIN auto-login + outbound DoorParty bridge
 
