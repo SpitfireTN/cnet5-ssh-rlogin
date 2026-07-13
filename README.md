@@ -1,4 +1,7 @@
-# CNet/5 `bbs` reverse-engineering workbench
+# C-Net/5 SSH/RLogin
+
+CNet/5 `bbs` reverse-engineering workbench, plus the SSH/RLOGIN gateways
+(`ssh-proxy/`, `rlogin-gateway/`) that front the live BBS.
 
 Goal: recover editable/maintainable source for CNet/5 (Amiga BBS software,
 closed-source, no updates in years, original source unavailable). Starting
