@@ -1,7 +1,15 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# CI for the gateway scripts.
+#
+# These are not a Python package -- they are standalone scripts run by sshd
+# (relay.py, via ForceCommand) and by systemd (rlogin_server.py,
+# doorparty_bridge.py). There is nothing to build and nothing to install, so
+# this checks the two things that actually matter: that every script still
+# compiles, and that flake8 finds no syntax errors or undefined names.
+#
+# A syntax error in relay.py breaks every SSH login to the BBS, and it would
+# not be noticed until a caller tried to connect. That is what this catches.
 
-name: Python package
+name: CI
 
 on:
   push:
@@ -10,31 +18,52 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  check:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+
+    - name: Install tooling
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
+
+    - name: Every script must compile
       run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+        python -m py_compile \
+          shared/telnet_util.py \
+          ssh-proxy/relay.py \
+          rlogin-gateway/rlogin_server.py \
+          rlogin-gateway/doorparty_bridge.py \
+          rlogin-gateway/test_rlogin_target.py
+
+    - name: Lint -- real errors only
+      run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Lint -- style, advisory
+      run: flake8 . --count --exit-zero --max-complexity=12 --max-line-length=127 --statistics
+
+    - name: Tests
       run: |
-        pytest
+        # pytest exits 5 when it collects nothing. There are no tests yet, and
+        # "no tests" should not read as "the build is broken" -- but a real
+        # failure still must. So treat 5 as success and nothing else.
+        set +e
+        pytest -q
+        rc=$?
+        set -e
+        if [ $rc -eq 5 ]; then
+          echo "No tests collected -- nothing to run."
+          exit 0
+        fi
+        exit $rc
