@@ -203,6 +203,7 @@ def main():
         except termios.error:
             raw_mode_saved = None
 
+    bbs_reset = False
     try:
         while True:
             rlist, _, _ = select.select([stdin_fd, bbs], [], [], 60)
@@ -213,6 +214,13 @@ def main():
                     chunk = bbs.recv(4096)
                 except (BlockingIOError, InterruptedError):
                     chunk = b"\x00"  # spurious wakeup, loop again
+                except OSError:
+                    # BBS side reset the connection (e.g. emulated socket
+                    # hard-closed) instead of a clean FIN -> recv() raises
+                    # rather than returning b"". Treat it like EOF instead
+                    # of letting the traceback reach the caller's terminal.
+                    bbs_reset = True
+                    break
                 if chunk == b"":
                     break
                 if chunk != b"\x00":
@@ -229,7 +237,11 @@ def main():
                     chunk = b""
                 if chunk == b"":
                     break
-                bbs.sendall(handle_caller_to_bbs(chunk))
+                try:
+                    bbs.sendall(handle_caller_to_bbs(chunk))
+                except OSError:
+                    bbs_reset = True
+                    break
     finally:
         try:
             bbs.close()
@@ -240,6 +252,12 @@ def main():
                 termios.tcsetattr(stdin_fd, termios.TCSADRAIN, raw_mode_saved)
             except termios.error:
                 pass
+    if bbs_reset:
+        try:
+            stdout.write(b"\r\n[Connection to the BBS was lost. Please reconnect.]\r\n")
+            stdout.flush()
+        except Exception:
+            pass
     return 0
 
 

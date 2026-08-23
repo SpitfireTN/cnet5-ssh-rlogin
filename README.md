@@ -48,12 +48,27 @@ spawned per-connection).
   `accounts.json` (copy from `accounts.example.json`, `chmod 600` — plaintext
   BBS passwords, not committed), scripts the pre-login prompts so the caller
   lands already logged in. Falls open to a plain relay after a 30s automation
-  budget or once the scripted steps finish.
+  budget or once the scripted steps finish. Was written but never actually
+  installed — port 513 had nothing listening, no `rlogin-gateway.service`
+  unit existed, and `accounts.json` didn't exist yet. Fixed by running
+  `setup_rlogin.sh`; it's now `enable --now`d and will survive reboots.
 - `doorparty_bridge.py` — **outbound**: bridges the BBS's telnet-only
   `ctelnet` door to `dpc2` (DoorParty Connector v2, RLOGIN). Binds
   `127.0.0.1` only. Picks up the caller's handle from
   `SysData:anet_identity`, falling back to the shared `system_tag` in
   `doorparty.json` (copy from `doorparty.example.json`, not committed).
+  Now installed properly: `doorparty-bridge`, `anet-bridge`,
+  `rlogin-gateway` and `doorparty-connector` are all `enable --now`d and
+  come up at boot (verified 2026-08-23: all four active+enabled, 513, 6513
+  and 6514 listening).
+  On the BBS-content side (not part of this repo — lives in
+  `Amiberry/HardDrives/DH3/CNet/Doors/rlogin/a-net.rexx`), the caller-facing
+  door that's supposed to hand off into this bridge was launching with
+  `{& ANET;Q}`, an MCI "run a built-in system command" code — `ANET` was
+  never a real system command, so CNet just rejected it and returned to the
+  prompt. Fixed to use `{#2 cnet:doors/internet_support/ctelnet 127.0.0.1
+  6513}`, the "run a program" MCI code (matching the working pattern in the
+  BBSLink door), pointed at the bridge's actual listen address.
 - `test_rlogin_target.py` — throwaway RLOGIN echo server standing in for
   `dpc2` to validate the `ctelnet → doorparty_bridge → target` chain
   end-to-end before `dpc2`/DoorParty access exists.

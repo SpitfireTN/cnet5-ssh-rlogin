@@ -1,0 +1,14 @@
+[Unit]
+Description=DoorParty Connector v2 (dpc2) - SSH-tunneled RLOGIN connector to DoorParty
+After=network.target
+
+[Service]
+Type=simple
+User=spitfiretn
+WorkingDirectory=/home/spitfiretn/cnet-re/rlogin-gateway/dpc2
+ExecStart=/home/spitfiretn/cnet-re/rlogin-gateway/dpc2/doorparty-connector
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

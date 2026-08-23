@@ -1,26 +1,38 @@
 #!/usr/bin/env python3
 """
-Outbound bridge: C-Net/5's ctelnet door -> DoorParty (via dpc2).
+Outbound bridge: C-Net/5's ctelnet door -> an outbound RLOGIN network.
 
 ctelnet (Doors:internet_support/ctelnet) is a telnet client baked into the
-Amiga BBS - it has no RLOGIN support. dpc2 (DoorParty Connector v2) is an
-RLOGIN *server* listening locally, which SSH-tunnels out to DoorParty's real
-RLOGIN server. Neither speaks the other's protocol, so this process sits
-between them:
+Amiga BBS - it has no RLOGIN support. This process sits between ctelnet and
+an RLOGIN *server* (which may itself be a local SSH-tunnel connector like
+dpc2, or a directly-reachable remote RLOGIN host):
 
-    ctelnet --(telnet)--> [this bridge] --(rlogin)--> dpc2 --(ssh tunnel)--> DoorParty
+    ctelnet --(telnet)--> [this bridge] --(rlogin)--> BRIDGE_CONFIG_FILE's target
 
-Setup on the C-Net/5 side (once this bridge is running):
+Despite the filename, this script is generic - it's run as two separate
+systemd services, each with its own port/config/identity via env vars:
+  - doorparty-bridge: RLOGIN_BRIDGE_PORT=6513, doorparty.json -> dpc2 (which
+    SSH-tunnels out to DoorParty's real RLOGIN server), driven by
+    Doors:rlogin/doorparty.rexx.
+  - anet-bridge: RLOGIN_BRIDGE_PORT=6514, anet.json -> game.a-net-online.lol:513
+    directly (no SSH tunnel needed - A-Net Online's RLOGIN port is open),
+    driven by Doors:rlogin/a-net.rexx.
+Both rexx doors write the same SysData:anet_identity file (a-net.rexx was
+the original, DoorParty's door just reuses it) - harmless, since each door
+triggers ctelnet at its own bridge instance/port, and the file is consumed
+(read then deleted) per connection.
+
+Setup on the C-Net/5 side (once a bridge instance is running):
   1. From a BBS session, launch ctelnet and use its "AH" (Add Host) command
-     to register a host named e.g. "DoorParty" pointing at
-     127.0.0.1:<RLOGIN_BRIDGE_PORT> (this bridge's port, NOT dpc2's port -
-     ctelnet must never talk to dpc2 directly, it doesn't speak RLOGIN).
-  2. Add a line to bbsmenu: `#2 Doors:internet_support/ctelnet DoorParty}`
+     to register a host pointing at 127.0.0.1:<RLOGIN_BRIDGE_PORT> for that
+     instance (this bridge's port, NOT the remote RLOGIN target's port -
+     ctelnet must never talk to the remote target directly).
+  2. Add a line to bbsmenu: `#2 Doors:internet_support/ctelnet <name>}`
      so users can reach it as a menu command.
 
 This bridge does NOT expose RLOGIN or telnet to the internet - it binds
-127.0.0.1 only. dpc2 must independently be configured to also bind
-127.0.0.1 (its default is 0.0.0.0, which must be overridden).
+127.0.0.1 only. If the configured target is a local connector (like dpc2),
+that connector must independently be configured to also bind 127.0.0.1.
 """
 
 import json
@@ -33,17 +45,27 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "shared"))
 from telnet_util import BbsStreamFilter, escape_caller_bytes  # noqa: E402
 
-CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "doorparty.json")
+CONFIG_FILE = os.environ.get(
+    "BRIDGE_CONFIG_FILE",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "doorparty.json"),
+)
+SERVICE_TAG = os.environ.get("BRIDGE_SERVICE_TAG", "doorparty-bridge")
 BRIDGE_HOST = "127.0.0.1"
 BRIDGE_PORT = int(os.environ.get("RLOGIN_BRIDGE_PORT", "6513"))
 RLOGIN_ACK_TIMEOUT = 10.0
 
-# Real host path for SysData:anet_identity - a-net.rexx writes the caller's
-# handle here immediately before triggering the connection. Consumed once
-# (read then deleted) per connection; a stale/missing file just means the
-# caller reached this bridge some other way (e.g. TEL directly), so it
-# falls back to the shared identity in doorparty.json's system_tag.
-IDENTITY_FILE = "/home/spitfiretn/Amiberry/HardDrives/DH3/CNet/SysData/anet_identity"
+# Real host path for the identity file the matching rexx door (a-net.rexx or
+# doorparty.rexx) writes the caller's handle to immediately before triggering
+# the connection. Consumed once (read then deleted) per connection; a stale/
+# missing file just means the caller reached this bridge some other way
+# (e.g. TEL directly), so it falls back to the shared identity in the
+# config's system_tag. Each bridge instance uses its own file (set via
+# BRIDGE_IDENTITY_FILE) so a simultaneous A-Net caller and DoorParty caller
+# can't race each other's identity handoff.
+IDENTITY_FILE = os.environ.get(
+    "BRIDGE_IDENTITY_FILE",
+    "/home/spitfiretn/Amiberry/HardDrives/DH3/CNet/SysData/anet_identity",
+)
 
 
 def load_config():
@@ -52,7 +74,7 @@ def load_config():
 
 
 def consume_caller_identity():
-    """Read and delete the handle a-net.rexx left for this connection, if any.
+    """Read and delete the handle the rexx door left for this connection, if any.
     Racy across simultaneous callers on different nodes (single shared file,
     no per-connection correlation) - acceptable for this BBS's scale, but a
     known limitation, not a guarantee."""
@@ -157,7 +179,7 @@ class BridgeHandler(socketserver.BaseRequestHandler):
         try:
             cfg = load_config()
         except FileNotFoundError:
-            print(f"[doorparty-bridge] {peer}: no doorparty.json - refusing connection", file=sys.stderr)
+            print(f"[{SERVICE_TAG}] {peer}: no {os.path.basename(CONFIG_FILE)} - refusing connection", file=sys.stderr)
             ctelnet_sock.close()
             return
 
@@ -169,13 +191,13 @@ class BridgeHandler(socketserver.BaseRequestHandler):
         try:
             dpc2 = socket.create_connection((cfg["dpc2_host"], cfg["dpc2_port"]), timeout=10)
         except OSError as e:
-            print(f"[doorparty-bridge] {peer}: could not reach dpc2: {e}", file=sys.stderr)
+            print(f"[{SERVICE_TAG}] {peer}: could not reach dpc2: {e}", file=sys.stderr)
             ctelnet_sock.close()
             return
 
         handle = consume_caller_identity()
         server_user = handle if handle else cfg["system_tag"]
-        print(f"[doorparty-bridge] {peer}: identity = {server_user!r} "
+        print(f"[{SERVICE_TAG}] {peer}: identity = {server_user!r} "
               f"({'per-caller' if handle else 'shared fallback'})", file=sys.stderr)
 
         try:
@@ -186,18 +208,18 @@ class BridgeHandler(socketserver.BaseRequestHandler):
                 cfg.get("term", "ansi/38400"),
             )
         except Exception as e:
-            print(f"[doorparty-bridge] {peer}: rlogin handshake to dpc2 failed: {e}", file=sys.stderr)
+            print(f"[{SERVICE_TAG}] {peer}: rlogin handshake to dpc2 failed: {e}", file=sys.stderr)
             dpc2.close()
             ctelnet_sock.close()
             return
 
-        print(f"[doorparty-bridge] {peer}: connected to dpc2, bridging", file=sys.stderr)
+        print(f"[{SERVICE_TAG}] {peer}: connected to dpc2, bridging", file=sys.stderr)
         try:
             bridge(ctelnet_sock, dpc2)
         finally:
             dpc2.close()
             ctelnet_sock.close()
-            print(f"[doorparty-bridge] {peer}: session ended", file=sys.stderr)
+            print(f"[{SERVICE_TAG}] {peer}: session ended", file=sys.stderr)
 
 
 class BridgeServer(socketserver.ThreadingTCPServer):
@@ -207,12 +229,13 @@ class BridgeServer(socketserver.ThreadingTCPServer):
 
 def main():
     if not os.path.exists(CONFIG_FILE):
-        print(f"[doorparty-bridge] {CONFIG_FILE} not found. Copy doorparty.example.json to "
-              f"doorparty.json, fill in the real system tag, then restart.", file=sys.stderr)
+        print(f"[{SERVICE_TAG}] {CONFIG_FILE} not found. Copy the matching .example.json "
+              f"template to {os.path.basename(CONFIG_FILE)}, fill in the real target, then restart.",
+              file=sys.stderr)
         sys.exit(1)
 
     server = BridgeServer((BRIDGE_HOST, BRIDGE_PORT), BridgeHandler)
-    print(f"[doorparty-bridge] listening on {BRIDGE_HOST}:{BRIDGE_PORT} (loopback only), "
+    print(f"[{SERVICE_TAG}] listening on {BRIDGE_HOST}:{BRIDGE_PORT} (loopback only), "
           f"forwarding to dpc2", file=sys.stderr)
     try:
         server.serve_forever()

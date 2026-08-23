@@ -1,0 +1,8 @@
+{
+  "_comment": "Copy this file to anet.json (chmod 600) with A-Net Online's real system tag. Unlike doorparty.json, A-Net Online's RLOGIN port is directly reachable, so no local SSH-tunnel connector (like dpc2) is needed - dpc2_host/dpc2_port here point straight at A-Net Online.",
+  "system_tag": "YOUR-SYSTEM-TAG-HERE",
+  "client_user": "cnetbbs",
+  "term": "ansi/38400",
+  "dpc2_host": "game.a-net-online.lol",
+  "dpc2_port": 513
+}

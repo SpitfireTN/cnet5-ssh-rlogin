@@ -1,0 +1,17 @@
+[Unit]
+Description=Outbound bridge: C-Net/5 ctelnet door -> A-Net Online (direct RLOGIN)
+After=network.target
+
+[Service]
+Type=simple
+User=spitfiretn
+Environment=RLOGIN_BRIDGE_PORT=6514
+Environment=BRIDGE_CONFIG_FILE=/home/spitfiretn/cnet-re/rlogin-gateway/anet.json
+Environment=BRIDGE_SERVICE_TAG=anet-bridge
+Environment=BRIDGE_IDENTITY_FILE=/home/spitfiretn/Amiberry/HardDrives/DH3/CNet/SysData/anet_identity
+ExecStart=/usr/bin/python3 /home/spitfiretn/cnet-re/rlogin-gateway/doorparty_bridge.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

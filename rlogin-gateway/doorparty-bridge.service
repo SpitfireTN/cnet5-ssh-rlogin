@@ -5,6 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=spitfiretn
+Environment=BRIDGE_IDENTITY_FILE=/home/spitfiretn/Amiberry/HardDrives/DH3/CNet/SysData/doorparty_identity
 ExecStart=/usr/bin/python3 /home/spitfiretn/cnet-re/rlogin-gateway/doorparty_bridge.py
 Restart=on-failure
 RestartSec=5
