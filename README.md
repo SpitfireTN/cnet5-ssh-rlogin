@@ -37,6 +37,56 @@ Testing changes means editing/testing a copy, then `sudo cp`-ing it to
 `/usr/local/bin/cnet-ssh-relay.py` (`redeploy_relay.sh` does this) — no sshd
 reload needed, since it's invoked fresh per-connection.
 
+### IPv6, and why a caller has to be *told* their own address
+
+The BBS engine is **IPv4-only** — under emulation it binds `0.0.0.0` and there
+is no IPv6 listener for it anywhere. An IPv6 session therefore can never
+terminate on the BBS. It terminates on a relay on a second host (the site's
+mail hub, which owns the public `AAAA` because **IPv6 has no NAT**, so one
+hostname cannot be split across two machines by port the way IPv4 is) and is
+forwarded inward over IPv4.
+
+The consequence is easy to miss: the BBS — and `sshd` on the BBS host — see
+the *relay* as the client, not the caller. `SSH_CONNECTION` carries the
+relay's address. The caller's real IPv6 address exists at exactly one point in
+the path, the relay, which is the last hop that still knows it.
+
+That matters because IPv6 BBS listings expect a caller to be able to verify
+their call really did arrive over IPv6, and nothing downstream of the relay
+can show them. Note the useful corollary: arriving *from* the relay's address
+is itself proof the session came in over IPv6, since the relay listens
+`ipv6only` and an IPv4 caller is NAT-forwarded by the router keeping their own
+address.
+
+Two mechanisms, because the two protocols permit different things:
+
+- **telnet** — the relay writes the address into the stream before bridging.
+  `socat ... EXEC:` a small wrapper that reads **`SOCAT_PEERADDR`** (set by
+  socat for `EXEC` children; it arrives *bracketed*, `[2001:db8::1]`), prints
+  it, then `exec socat - TCP4:<bbs-host>:<port>`. The banner is plain ASCII
+  with CRLF on purpose — C64 and Amiga terminals read it too, so no ANSI, no
+  UTF-8, no colour.
+- **SSH** — the stream is encrypted and framed, so nothing can be injected
+  into it without corrupting it. Instead the relay *remembers* the caller,
+  keyed by **the source port of its own outbound connection** to the BBS host.
+  `sshd` reports that port in `SSH_CONNECTION`, and it is unique per live
+  session, so it is an exact join key. The relay answers port→address lookups
+  on a LAN-bound socket; `relay.py`'s `ipv6_greeting()` asks, and greets the
+  caller with their own address.
+
+`ipv6_greeting()` is **fail-open at every step** — no `SSH_CONNECTION`, not
+via the gateway, lookup refused, entry expired, hub unreachable — returning
+either nothing or the address-less `IPv6 connection verified.` rather than
+raising. A cosmetic greeting must never cost a caller their session. When the
+lookup service is absent the connect is *refused* (RST) rather than timing
+out, so there is no caller-visible delay either.
+
+The two relay-side pieces run on the gateway host, not from this checkout, and
+so are not tracked here — the same arrangement as `/usr/local/bin/cnet-ssh-relay.py`.
+`relay.py` reaches them through the `GATEWAY_*` constants at the top of the
+file; a single-machine install with no IPv6 front end leaves them unused and
+the greeting simply never fires.
+
 ## rlogin-gateway/ — RLOGIN auto-login + outbound DoorParty bridge
 
 Two independent services that both speak RLOGIN (RFC 1282) at the BBS's

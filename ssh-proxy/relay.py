@@ -28,6 +28,22 @@ import tty
 BBS_HOST = "127.0.0.1"
 BBS_PORT = 6800
 
+# --- IPv6 caller identification -------------------------------------------
+# call.rofbbs.com carries ONE AAAA and it points at rof-hub, because IPv6 has
+# no NAT to split a hostname across two machines by port. So an IPv6 caller
+# reaches rof-hub first and is relayed here over IPv4, which means sshd sees
+# rof-hub as the client and SSH_CONNECTION carries rof-hub's LAN address, not
+# the caller's. Arriving FROM this address therefore proves the session came
+# in over IPv6 (rof-hub's relay is ipv6only); an IPv4 caller is forwarded by
+# the router and keeps their real public address.
+#
+# rof-hub's relay records caller-address-by-source-port and answers lookups on
+# GATEWAY_LOOKUP_PORT, so we can also tell the caller their actual address --
+# which is what an IPv6 BBS-list maintainer needs to verify.
+GATEWAY_HOST = "192.168.86.39"
+GATEWAY_LOOKUP_PORT = 29222
+GATEWAY_LOOKUP_TIMEOUT = 1.5   # keep short: this runs before the caller sees anything
+
 IAC = 0xFF
 DONT = 254
 DO = 253
@@ -176,6 +192,40 @@ def sock_write_bbs(data: bytes):
         _bbs_sock.sendall(data)
 
 
+def ipv6_greeting() -> bytes:
+    """Tell an IPv6 caller their own address, or b"" for everyone else.
+
+    Entirely cosmetic and entirely fail-open: any problem resolving the
+    address returns b"" (or the address-less form) rather than raising, so a
+    greeting can never cost a caller their session.
+    """
+    try:
+        parts = os.environ.get("SSH_CONNECTION", "").split()
+        if len(parts) < 2 or parts[0] != GATEWAY_HOST:
+            return b""          # direct IPv4 caller, or not via the gateway
+        source_port = parts[1]
+        addr = None
+        try:
+            with socket.create_connection(
+                (GATEWAY_HOST, GATEWAY_LOOKUP_PORT), timeout=GATEWAY_LOOKUP_TIMEOUT
+            ) as look:
+                look.settimeout(GATEWAY_LOOKUP_TIMEOUT)
+                look.sendall((source_port + "\n").encode("ascii"))
+                reply = look.recv(64).decode("ascii", "replace").strip()
+            if reply and reply != "-":
+                addr = reply
+        except Exception:
+            addr = None         # hub unreachable / restarted / entry expired
+        if addr:
+            return ("\r\n  IPv6 connection verified.\r\n"
+                    "  Your address: " + addr + "\r\n\r\n").encode("ascii", "replace")
+        # Reaching us via the gateway is itself proof of IPv6, even when the
+        # exact address could not be recovered.
+        return b"\r\n  IPv6 connection verified.\r\n\r\n"
+    except Exception:
+        return b""
+
+
 def main():
     global _bbs_sock
     try:
@@ -186,6 +236,14 @@ def main():
         return 1
     bbs.setblocking(False)
     _bbs_sock = bbs
+
+    greeting = ipv6_greeting()
+    if greeting:
+        try:
+            sys.stdout.buffer.write(greeting)
+            sys.stdout.buffer.flush()
+        except Exception:
+            pass
 
     stdin_fd = sys.stdin.fileno()
     stdout = sys.stdout.buffer
